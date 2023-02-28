@@ -1,38 +1,21 @@
-it('verify positive-visit', () => {
-    cy.visit("https://www.amazon.in/gp/navigation-country/")
- })
- it('Searches for a product, adds it to cart and checks out successfully', () => {
-     // Search for the product
-     cy.get('#nav-search')
-       .type('nike shoes of size 9').should('have.value', 'nike shoes of size 9')
-     cy.get('#nav-search-submit-button').click()
- 
-     // Select the first product
-     cy.get('.a-text-normal').first().click()
- 
-
-     cy.get('#add-to-cart-button').click()
-     cy.wait(1000)
-     cy.get('.a-button-text').should('have.text', '1')
- 
-     // Proceed to checkout
-     cy.get('.a-button-input').click()
- 
-     
+describe('myfirsttest',()=>{
+  it('verify positive-visit', () => {
+      cy.visit("https://www.amazon.in")
+    cy.get('#nav-link-accountList-nav-line-1').click()
+    cy.get('#ap_email').click().type('phone number')
+    cy.get('.a-button-inner > #continue').click()
+    cy.get('#ap_password').click().type('password') 
+    cy.get('.a-button-inner > #continue').click()
+    cy.get('#cvf-input-code').click().type('OTP')
+    cy.get('.a-button-inner > #continue').click()
+    cy.get('#ap_password').click().type('password')
+    cy.get('#signInSubmit').click()
+    cy.wait(5000)
+    cy.get('#twotabsearchtextbox').click().type('nike shoes of size 9')
+    cy.get('#nav-search-submit-button').click()
+    cy.get('[data-asin="B08BW4WF7C"] > .sg-col-inner > .s-widget-container > .s-card-container > .a-spacing-base > .s-product-image-container > .s-image-padding > .rush-component > .a-link-normal > .a-section > .s-image').click()
+    cy.get('add-to-cart-button').click()
+    cy.get('proceed-to-check-out-action').click()
    })
-   it('Searches for a non-existing product and gets no results', () => {
-     // Search for the product
-     cy.get('#nav-search')
-       .type('qrajstyunubib').should('have.value', 'qrajstyunubib')
-     cy.get('#vsearch_listening_container').click()
- 
-     // Verify that no results are found
-     cy.contains('No results for').should('be.visible')
-   })
- 
-   it('Attempts to checkout without adding any items to the cart', () => {
-     // Proceed to checkout
-     cy.get('.a-button-input').click()
- 
-     
-   })
+  })
+  
